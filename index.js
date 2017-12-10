@@ -16,10 +16,25 @@ app.use(bodyParser.json());
 
 app.get('/pending', (req, res) => {
   console.log(req.query, req.params);
+  res.send(
+    {
+      'pending':
+        [
+          {
+            'name': 'one',
+            'message': 'testmsg'
+          },
+          {
+            'name': 'two',
+            'message': 'msg2'
+          }
+        ]
+    });
 })
 
 app.post('/send', (req, res) => {
   console.log(req.body);
+  res.sendStatus(200);
 })
 
 
