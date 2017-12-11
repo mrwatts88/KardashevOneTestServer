@@ -32,7 +32,7 @@ app.get('/pending', (req, res) => {
     });
 })
 
-app.post('/send', (req, res) => {
+app.post('/initshipment', (req, res) => {
   console.log(req.body);
   res.sendStatus(200);
 })
