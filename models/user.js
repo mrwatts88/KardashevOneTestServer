@@ -12,4 +12,4 @@ class User {
       this.fcmToken = userData.fcmToken
     }
         
-  }
+  }module.exports = User;

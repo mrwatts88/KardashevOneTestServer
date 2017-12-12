@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const admin = require("firebase-admin");
+const User = require('./models/user');
 
 var serviceAccount = require("./kardashevonefirebase-firebase-adminsdk-jngdo-24c83b58a1.json");
 
@@ -34,6 +35,14 @@ app.get('/pending', (req, res) => {
 
 app.post('/initshipment', (req, res) => {
   console.log(req.body);
+  res.sendStatus(200);
+})
+
+app.post('/login', (req, res) => {
+  let user = new User(req.body);
+
+  console.log(user.displayName + ' just logged in at ' + Date.now().toLocaleString())
+
   res.sendStatus(200);
 })
 
