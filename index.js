@@ -39,7 +39,7 @@ app.post('/initshipment', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  let user = new User(req.body);
+  let user = new User(req.body.data);
 
   console.log(user.displayName + ' just logged in at ' + Date.now().toLocaleString())
 
