@@ -41,7 +41,7 @@ app.post('/initshipment', (req, res) => {
 app.post('/login', (req, res) => {
   let user = new User(req.body.data);
 
-  console.log(user.displayName + ' just logged in at ' + Date.now().toLocaleString())
+  console.log(user.email + ' just logged in with token ' + user.fcmToken)
 
   res.sendStatus(200);
 })
@@ -62,17 +62,17 @@ app.post('/fcmtoken', (req, res) => {
     }
   };
 
-  // Send a message to the device corresponding to the provided
-  // registration token.
-  admin.messaging().sendToDevice(registrationToken, payload)
-    .then(function (response) {
-      // See the MessagingDevicesResponse reference documentation for
-      // the contents of response.
-      console.log("Successfully sent message:", response);
-    })
-    .catch(function (error) {
-      console.log("Error sending message:", error);
-    });
+  // // Send a message to the device corresponding to the provided
+  // // registration token.
+  // admin.messaging().sendToDevice(registrationToken, payload)
+  //   .then(function (response) {
+  //     // See the MessagingDevicesResponse reference documentation for
+  //     // the contents of response.
+  //     console.log("Successfully sent message:", response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log("Error sending message:", error);
+  //   });
 
 
   res.sendStatus(200);
