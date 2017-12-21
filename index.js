@@ -35,6 +35,18 @@ app.get('/pending', (req, res) => {
 
 app.post('/initshipment', (req, res) => {
   console.log(req.body);
+
+  let db = admin.firestore();
+  let users = db.collection('UserData');
+  users.where('phoneNumber', '==', req.body.recipient).get().then( users => {
+    users.forEach(user => {
+      console.log(user._fieldsProto);
+    })
+  }).catch(err =>{
+    console.log(err);
+    res.sendStatus(500);
+  })
+
   res.sendStatus(200);
 })
 
