@@ -35,19 +35,26 @@ app.get('/pending', (req, res) => {
 
 app.post('/initshipment', (req, res) => {
   console.log(req.body);
+  let shipment = req.body;
+
 
   let db = admin.firestore();
   let users = db.collection('UserData');
-  users.where('phoneNumber', '==', req.body.recipient).get().then( users => {
-    users.forEach(user => {
-      console.log(user._fieldsProto);
+  users.where('phoneNumber', '==', req.body.recipient).get().then( result => {
+    result.forEach(user => {
+      let pendingShipments = Array.from(user.get('pendingShipments'));
+      pendingShipments.push(shipment);
+      users.doc(user.id).update({
+        pendingShipments: pendingShipments
+      }).then(() =>{
+        res.sendStatus(200);
+      }).catch(err => {
+        res.sendStatus(500);
+      })
     })
   }).catch(err =>{
-    console.log(err);
     res.sendStatus(500);
   })
-
-  res.sendStatus(200);
 })
 
 app.post('/login', (req, res) => {
