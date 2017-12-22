@@ -42,17 +42,15 @@ app.post('/initshipment', (req, res) => {
   let users = db.collection('UserData');
   users.where('phoneNumber', '==', req.body.recipient).get().then( result => {
     result.forEach(user => {
-      let pendingShipments = Array.from(user.get('pendingShipments'));
-      pendingShipments.push(shipment);
-      users.doc(user.id).update({
-        pendingShipments: pendingShipments
-      }).then(() =>{
-        res.sendStatus(200);
+      users.doc(user.id).collection('pendingShipments').add(shipment).then(() => {
+        res.sendStatus(200)
       }).catch(err => {
-        res.sendStatus(500);
+        console.log(err)
+        res.sendStatus(500)
       })
     })
   }).catch(err =>{
+    console.log(err)
     res.sendStatus(500);
   })
 })
