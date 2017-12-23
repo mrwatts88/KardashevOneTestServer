@@ -5,6 +5,7 @@ const app = express();
 const admin = require("firebase-admin");
 const User = require('./models/user');
 const serviceAccount = require("./kardashevonefirebase-firebase-adminsdk-jngdo-24c83b58a1.json");
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -42,4 +43,4 @@ app.post('/initshipment', (req, res) => {
   })
 })
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log('Example app listening on port 3000!'))
